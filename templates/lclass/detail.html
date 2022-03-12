@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block con %}
+    <h1>{{d.name}}</h1>
+    <img src="{{d.getpic}}" width="300px"><br><br>
+    <b>ROOT</b><br>
+    <input type="text" value="{{d.root}}" disabled><br><br>
+    <textarea cols="70" rows="6" disabled>{{d.content}}</textarea><br><br>
+    <b>IDENTITIY</b><br>
+    <textarea cols="70" rows="6" disabled>{{d.iden}}</textarea><br><br>
+    {% if user in d.likey.all %}
+        {{d.likey.all.count}} 좋아요<a href="{% url 'lclass:cancel' d.id %}"><button>♥</button></a>
+    {% else %}
+        좋아요 <a href="{% url 'lclass:likey' d.id %}"><button>♡</button></a>
+    {% endif %}
+        <a href="{% url 'lclass:index' %}"><button>돌아가기</button></a>
+    <hr>
+    <h3>댓글</h3>
+    {% if rset %}
+        {% for i in rset %}
+            <b>{{i.replyer}} : </b>
+            {{i.comment}}
+            {% if i.replyer == user %}
+                <a href="{% url 'lclass:dreply' d.id i.id %}"><button>X</button></a>
+            {% endif %}
+            <br>
+        {% endfor %}
+    {% else %}
+        <h3>첫번째 댓글을 달아주세요!</h3>
+    {% endif %}
+    <hr>
+    <h3>댓글 작성</h3>
+    <form method="post" action="{% url 'lclass:creply' d.id %}">
+        {% csrf_token %}
+        <b>{{user}}</b>
+        <textarea cols="50" rows="3" name="comm"></textarea>
+        <button>작성</button>
+    </form>
+{% endblock %}

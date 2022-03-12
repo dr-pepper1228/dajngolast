@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block con %}
+    <h1>LOSTARK CLASS</h1>
+    <table border="1">
+        <tr>
+            <th>NO</th>
+            <th>ROOT</th>
+            <th>NAME</th>
+            <th>IMAGE</th>
+            <th>CONTENT</th>
+        </tr>
+        {% if dset %}
+            {% for i in dset %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.root}}</td>
+                    <td><a href="{% url 'lclass:detail' i.id %}"><b>{{i.name}}</b></a></td>
+                    <td><img src="{{i.getpic}}" width="200px"></td>
+                    <td>{{i.ones}}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+                <tr colspan="5">NO DATA</tr>
+        {% endif %}
+    </table>
+    <br>
+
+        {% if dset.has_previous%}
+        <a href="?page=1&cate={{cate}}&kw={{kw}}"><button >처음</button></a>
+        <a href="?page={{dset.previous_page_number}}&cate={{cate}}&kw={{kw}}"><button>이전</button></a>
+    {% else %}
+        <button disabled>처음</button>
+        <button disabled>이전</button>
+    {% endif %}
+
+    {% for i in dset.paginator.page_range %}
+    {% if i >= dset.number|add:-1 and dset.number|add:1 >= i %}
+           <a href="?page={{i}}&cate={{cate}}&kw={{kw}}"><button {% if dset.number == i %} disabled {% endif %}>{{i}}</button></a>
+       {% endif %}
+    {% endfor %}
+
+    {% if dset.has_next%}
+        <a href="?page={{dset.next_page_number}}&cate={{cate}}&kw={{kw}}"><button>다음</button></a>
+        <a href="?page={{dset.paginator.num_pages}}&cate={{cate}}&kw={{kw}}"><button >마지막</button></a>
+    {% else %}
+        <button disabled>다음</button>
+        <button disabled>마지막</button>
+    {% endif %}
+    <br>
+    <form>
+        <select name="cate">
+            <option value="ro" {% if cate == 'ro' %} selected {% endif %}>ROOT</option>
+            <option value="name" {% if cate == 'name' %} selected {% endif %}>NAME</option>
+        </select>
+        <input type="text" name="kw" size="50" value="{{kw}}">
+        <button>검색</button>
+    </form>
+
+<style>
+    table{
+        text-align: center;
+    }
+</style>
+
+{% endblock %}

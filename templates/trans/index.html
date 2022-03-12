@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block con %}
+    <h1>TRANSLATION PAGE</h1>
+    <br><br>
+    <form method="post">
+        {% csrf_token %}
+        <textarea cols="70" rows="10" name="bf">{{bf}}</textarea>
+        <br><br>
+            <select name="fr">
+                <option value="en" {% if fr == 'en' %} selected {% endif %}>English</option>
+                <option value="ko" {% if fr == 'ko' %} selected {% endif %}>Korean</option>
+                <option value="la" {% if fr == 'la' %} selected {% endif %}>Latin</option>
+            </select>
+            에서
+            <select name="to">
+                <option value="ru" {% if fr == 'ru' %} selected {% endif %}>Russian</option>
+                <option value="eS" {% if fr == 'eS' %} selected {% endif %}>Spanish</option>
+                <option value="ja" {% if fr == 'ja' %} selected {% endif %}>japanese</option>
+            </select>
+            로
+        <button>번역</button>
+        <br><br>
+        <textarea cols="70" rows="10" disabled>{{af}}</textarea>
+    </form>
+
+{% endblock %}

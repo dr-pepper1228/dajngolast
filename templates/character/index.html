@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block con %}
+    <h1>{{user}}'s CHARACTER PAGE</h1>
+    <table border="1">
+        <tr>
+            <th>NO</th>
+            <th>NAME</th>
+            <th>LEVEL</th>
+            <th>CLASS</th>
+        </tr>
+        {% if cset %}
+            {% for i in cset %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'character:detail' i.id %}"><b>{{i.name}}</b></a></td>
+                    <td>{{i.level}}</td>
+                    <td>{{i.job}}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+                <tr colspan="4">캐릭터 정보를 추가해보세요</tr>
+        {% endif %}
+    </table>
+    <br>
+    <a href="{% url 'character:create' user.id %}"><button>생성하기</button></a>
+{% endblock %}

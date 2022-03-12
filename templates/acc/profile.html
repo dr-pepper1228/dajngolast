@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block con %}
+    <h1>PROFILE PAGE</h1>
+    <img src="{{user.getpic}}" width="300px"><br><br>
+    ID<input type="text" value="{{user.username}}" disabled><br><br>
+    EMAIL<input type="email" value="{{user.email}}" disabled><br><br>
+    COMMENT<textarea cols="50" rows="5" disabled>{{user.comment}}</textarea><br><br>
+    <a href="{% url 'acc:update' %}"><button>수정하기</button></a>
+    <a href="{% url 'acc:index' %}"><button>돌아가기</button></a>
+    <a href="{% url 'acc:delete' %}"><button>탈퇴하기</button></a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+<html>
+    {% block con%}
+    <h1>CREATE PAGE</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        IMAGE<input type="file" name="cpic"><br><br>
+        NAME<input type="text" name="cname" value="{{d.name}}"><br><br>
+        LEVEL<input type="number" name="clevel" value="{{d.level}}"><br><br>
+        CLASS<input type="text" name="cjob" value="{{d.job}}"><br><br>
+        <button>수정하기</button>
+        <a href="{% url 'character:index' user.id %}"><button type="button">돌아가기</button></a>
+    </form>
+    {% endblock %}
+</html>

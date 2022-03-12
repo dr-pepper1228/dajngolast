@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block con %}
+    <h1>UPDATE PAGE</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        PROFILE IMAGE <input type="file" name="upic"><br><br>
+        ID<input type="text" value="{{user.username}}" disabled><br><br>
+        EMAIL<input type="email" value="{{user.email}}" name="umail"><br><br>
+        COMMENT<textarea cols="50" rows="5" name="ucomm">{{user.comment}}</textarea><br><br>
+        <button>업데이트</button>
+        <a href="{% url 'acc:index' %}"><button type="button">돌아가기</button></a>
+    </form>
+{% endblock %}

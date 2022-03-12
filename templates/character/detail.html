@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+<html>
+    {% block con%}
+    <h1>DETAIL PAGE</h1>
+    <img src="{{d.getpic}}" width="500px"><br><br>
+    NAME<input type="text" value="{{d.name}}" disabled><br><br>
+    LEVEL<input type="text" value="{{d.level}}" disabled><br><br>
+    CLASS<input type="text" value="{{d.job}}" disabled><br><br>
+    <a href="{% url 'character:index' user.id %}"><button>돌아가기</button></a>
+    <a href="{% url 'character:update' user.id d.id %}"><button>수정하기</button></a>
+    <a href="{% url 'character:delete' user.id d.id %}"><button>삭제하기</button></a>
+    {% endblock %}
+</html>
